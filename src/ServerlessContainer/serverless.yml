@@ -1,0 +1,16 @@
+﻿service: serverless-container
+
+provider:
+  name: aws
+  lambdaHashingVersion: 20201221
+
+functions:
+  csharp-skill:
+    image:
+      uri: '${env:AWS_ACCOUNT}.dkr.ecr.us-east-1.amazonaws.com/serverless-serverless-container-dev@${env:DIGEST}'
+      command:
+        - ServerlessContainer::ServerlessContainer.Functions::Get
+    events:
+      - http:
+          path: hello
+          method: get        
